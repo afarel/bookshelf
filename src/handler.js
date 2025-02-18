@@ -3,15 +3,17 @@ const { books } = require('./books');
 
 //  method post
 
-const addBooksHandler = (request,h) => {
-    const { name, year, author, summary, publisher, pageCount, readPage, reading } = request.payload;
+const addBooksHandler = (request, h) => {
+    const {
+        name, year, author, summary, publisher, pageCount, readPage, reading,
+    } = request.payload;
     const id = nanoId(16);
     const insertedAt = new Date().toISOString();
     const updatedAt = insertedAt;
     const finished = pageCount === readPage;
 
-    if (!name){
-        const response = h.response({
+    if (!name) {
+        return h.response({
             status: 'fail',
             message: 'gagal menambahkan buku. Mohon isi nama buku ',
         }).code(400);
@@ -20,7 +22,7 @@ const addBooksHandler = (request,h) => {
     if (readPage > pageCount) {
         return h.response({
             status: 'fail',
-            message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount'
+            message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
         }).code(400);
     }
 
@@ -44,12 +46,12 @@ const addBooksHandler = (request,h) => {
         status: 'success',
         message: 'buku berhasil ditambahkan',
         data: { bookId: id },
-    }).code(201); 
+    }).code(201);
 };
 
 
 const getAllBooksHandler = (request, h) => {
-    const booksResponse = books.map((book)=> ({
+    const booksResponse = books.map(book => ({
         id: book.id,
         name: book.name,
         publisher: book.publisher,
@@ -58,8 +60,8 @@ const getAllBooksHandler = (request, h) => {
     return h.response({
         status: 'success',
         data: {
-            books: booksResponse
-        }
+            books: booksResponse,
+        },
     }).code(200);
 };
 
@@ -68,7 +70,7 @@ const getBooksByIdHandler = (request, h) => {
     const book = books.find(n => n.id === id);
 
     if (book !== undefined) {
-        return h.respponse ({
+        return h.respponse({
             status: 'success',
             data: {
                 book,
@@ -76,7 +78,7 @@ const getBooksByIdHandler = (request, h) => {
         }).code(200);
     }
 
-    return h.response ({
+    return h.response({
         status: 'fail',
         message: 'Buku tidak ditemukan',
     }).code(404);

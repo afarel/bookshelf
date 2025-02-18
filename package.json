@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/server.js",
-    "start-dev": "nodemon src/server.js"
+    "start-dev": "nodemon src/server.js",
+    "lint": "",
+    "precommit": "lint-staged"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +16,17 @@
     "@hapi/hapi": "^21.3.12",
     "nanoid": "^5.1.0",
     "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "babel-eslint": "8.2.1",
+    "eslint": "4.17.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-mfe": "0.1.2",
+    "eslint-plugin-import": "2.8.0",
+    "husky": "0.14.3",
+    "lint-staged": "6.1.0"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
   }
 }
