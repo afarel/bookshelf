@@ -1,8 +1,7 @@
 const { nanoId } = require('nanoid');
 const { books } = require('./books');
 
-//  method post
-
+// kriteria 3
 const addBooksHandler = (request, h) => {
     const {
         name, year, author, summary, publisher, pageCount, readPage, reading,
@@ -49,7 +48,7 @@ const addBooksHandler = (request, h) => {
     }).code(201);
 };
 
-
+// kriteria 4
 const getAllBooksHandler = (request, h) => {
     const booksResponse = books.map(book => ({
         id: book.id,
@@ -65,6 +64,7 @@ const getAllBooksHandler = (request, h) => {
     }).code(200);
 };
 
+// kriteria 5
 const getBooksByIdHandler = (request, h) => {
     const { id } = request.params;
     const book = books.find(n => n.id === id);
